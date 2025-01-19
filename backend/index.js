@@ -1,10 +1,13 @@
-const express = require('express');
-const pacienteRoutes = require('./routes/pacienteRoutes');
+import express, { json } from 'express';
+import dotenv from 'dotenv';
+import pacienteRoutes from './routes/pacienteRoutes.js';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+app.use(json());
 
 app.use('/api', pacienteRoutes);
 

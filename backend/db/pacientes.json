@@ -1,0 +1,25 @@
+[
+    {
+      "id": "1",
+      "paciente": "Javier Andrés Caicedo Rodriguez",
+      "fecha_nacimiento": "1993-01-01",
+      "tipo_identificacion": "CC",
+      "no_identificacion": "123456789",
+      "celular": "3005893604",
+      "telefono": "(602) 1234567",
+      "direccion": "calle 15 # 92-51",
+      "ocupacion": "Independiente",
+      "entidad": "Eps Sanitas",
+      "estado": "Estable",
+      "tipo_atencion": "Consulta de Psiquiatría",
+      "ultimo_consulta": "2024-24-01T15:30:00Z",
+      "consultas": [
+        {
+            "especialista": "Dra. Camila Zapata Zuñiga",
+            "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
+            "fecha_consulta": "2024-24-01T15:30:00Z"
+        }
+      ]
+    }
+  ]
+  
