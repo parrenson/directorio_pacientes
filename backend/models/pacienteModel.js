@@ -16,4 +16,9 @@ const getPacientesModel = () => {
     return readPacientes();
 };
 
-export { getPacientesModel };
+const getPacienteModel = (id) => {
+    const pacientes = readPacientes();
+    return pacientes.find((paciente) => paciente.id === id);
+};
+
+export { getPacientesModel, getPacienteModel };
