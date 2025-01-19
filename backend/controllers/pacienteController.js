@@ -1,8 +1,8 @@
-import { getPacientesModel, getPacienteModel } from '../models/pacienteModel.js';
+import { getPacientesModel, getPacienteModel, getConsultasModel, updatePacienteModel } from '../models/pacienteModel.js';
 
 const getPacientes = (req, res) => {
     const pacientes = getPacientesModel();
-    res.json(pacientes);
+    res.status(200).json(pacientes);
 };
 
 const getPaciente = (req, res) => {
@@ -13,10 +13,28 @@ const getPaciente = (req, res) => {
         return res.status(404).json({ message: 'Paciente no encontrado' });
     }
 
-    res.json(paciente);
+    const consultas = getConsultasModel(id);
+    paciente.consultas = consultas || [];
+
+    res.status(200).json(paciente);
 };
 
-const updatePaciente = () => { };
+const updatePaciente = (req, res) => { 
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    const paciente = getPacienteModel(id);
+
+    if (!paciente) {
+        return res.status(404).json({ message: 'Paciente no encontrado' });
+    }
+
+    updatePacienteModel(id, updatedData);
+    
+    res.status(200).json({
+        message: 'Paciente actualizado'
+    });
+};
 
 const checkIn = () => { };
 

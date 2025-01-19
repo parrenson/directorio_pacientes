@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "paciente_id": "123456",
+    "especialista": "Dra. Camila Zapata Zuñiga",
+    "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
+    "fecha_consulta": "2024-24-01T15:30:00Z"
+  },
+  {
+    "id": "2",
+    "paciente_id": "165432",
+    "especialista": "Dr. José Martinez",
+    "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
+    "fecha_consulta": "2022-23-12T15:30:00Z"
+  },
+  {
+    "id": "3",
+    "paciente_id": "145236",
+    "especialista": "Dra. Camila Zapata Zuñiga",
+    "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
+    "fecha_consulta": "2024-18-02T15:30:00Z"
+  },
+  {
+    "id": "4",
+    "paciente_id": "136524",
+    "especialista": "Dra. Sofia Lopez Buitrago",
+    "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
+    "fecha_consulta": "2024-10-04T15:30:00Z"
+  },
+  {
+    "id": "5",
+    "paciente_id": "152463",
+    "especialista": "Dr. Juan José Borrero",
+    "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
+    "fecha_consulta": "2023-11-10T15:30:00Z"
+  }
+]

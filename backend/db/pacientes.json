@@ -1,113 +1,77 @@
 [
-    {
-      "id": "123456",
-      "paciente": "Javier Andrés Caicedo Rodriguez",
-      "fecha_nacimiento": "1993-01-01",
-      "tipo_identificacion": "CC",
-      "no_identificacion": "123456789",
-      "celular": "3005893604",
-      "telefono": "(602) 1234567",
-      "direccion": "calle 15 # 92-51",
-      "ocupacion": "Independiente",
-      "entidad": "Eps Sanitas",
-      "estado": "Estable",
-      "tipo_atencion": "Consulta de Psiquiatría",
-      "ultimo_consulta": "2024-24-01T15:30:00Z",
-      "consultas": [
-        {
-            "especialista": "Dra. Camila Zapata Zuñiga",
-            "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
-            "fecha_consulta": "2024-24-01T15:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "165432",
-      "paciente": "María Fernanda López García",
-      "fecha_nacimiento": "1996-15-05",
-      "tipo_identificacion": "CC",
-      "no_identificacion": "402384765",
-      "celular": "3158206349",
-      "telefono": "(602) 165432",
-      "direccion": "calle 15 # 92-51",
-      "ocupacion": "Independiente",
-      "entidad": "Sura Capita",
-      "estado": "Moderado",
-      "tipo_atencion": "Consulta de Psicología",
-      "ultimo_consulta": "2022-23-12T15:30:00Z",
-      "consultas": [
-        {
-            "especialista": "Dr. José Martinez",
-            "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
-            "fecha_consulta": "2022-23-12T15:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "145236",
-      "paciente": "Juan Carlos Martínez Pérez",
-      "fecha_nacimiento": "1994-24-10",
-      "tipo_identificacion": "CC",
-      "no_identificacion": "589623014",
-      "celular": "3184762095",
-      "telefono": "(602) 145236",
-      "direccion": "calle 15 # 92-51",
-      "ocupacion": "Independiente",
-      "entidad": "Sura Capita",
-      "estado": "Estable",
-      "tipo_atencion": "Consulta de Psiquiatría",
-      "ultimo_consulta": "2024-18-02T15:30:00Z",
-      "consultas": [
-        {
-            "especialista": "Dra. Camila Zapata Zuñiga",
-            "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
-            "fecha_consulta": "2024-18-02T15:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "136524",
-      "paciente": "Luis Alejandro Hernández Grisales",
-      "fecha_nacimiento": "1994-24-10",
-      "tipo_identificacion": "CC",
-      "no_identificacion": "176594302",
-      "celular": "3219587430",
-      "telefono": "(602) 136524",
-      "direccion": "calle 15 # 92-51",
-      "ocupacion": "Independiente",
-      "entidad": "Particular",
-      "estado": "Critico",
-      "tipo_atencion": "Consulta de Psiquiatría",
-      "ultimo_consulta": "2024-10-04T15:30:00Z",
-      "consultas": [
-        {
-            "especialista": "Dra. Sofia Lopez Buitrago",
-            "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
-            "fecha_consulta": "2024-10-04T15:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "152463",
-      "paciente": "Ana Sofía Rodríguez García",
-      "fecha_nacimiento": "1994-24-10",
-      "tipo_identificacion": "CC",
-      "no_identificacion": "830165927",
-      "celular": "3219587430",
-      "telefono": "(602) 152463",
-      "direccion": "calle 15 # 92-51",
-      "ocupacion": "Independiente",
-      "entidad": "Eps Sanitas",
-      "estado": "Estable",
-      "tipo_atencion": "Consulta de Psiquiatría",
-      "ultimo_consulta": "2023-11-10T15:30:00Z",
-      "consultas": [
-        {
-            "especialista": "Dr. Juan José Borrero",
-            "observacion": "Consulta por dolor de cabeza intermitente, sin otros síntomas asociados. Recomendado reposo y seguimiento",
-            "fecha_consulta": "2023-11-10T15:30:00Z"
-        }
-      ]
-    }
-  ]
-  
+  {
+    "id": "123456",
+    "paciente": "Javier Andrés Caicedo Rodriguez",
+    "fecha_nacimiento": "1993-01-01",
+    "tipo_identificacion": "CC",
+    "no_identificacion": "123456789",
+    "celular": "3005893604",
+    "telefono": "(602) 1234567",
+    "direccion": "calle 15 # 92-51",
+    "ocupacion": "Independiente",
+    "entidad": "Eps Sanitas",
+    "estado": "Estable",
+    "tipo_atencion": "Consulta de Psiquiatría",
+    "ultimo_consulta": "2024-24-01T15:30:00Z"
+  },
+  {
+    "id": "165432",
+    "paciente": "María Fernanda López García",
+    "fecha_nacimiento": "1996-15-05",
+    "tipo_identificacion": "CC",
+    "no_identificacion": "402384765",
+    "celular": "3158206349",
+    "telefono": "(602) 165432",
+    "direccion": "calle 15 # 92-51",
+    "ocupacion": "Independiente",
+    "entidad": "Sura Capita",
+    "estado": "Moderado",
+    "tipo_atencion": "Consulta de Psicología",
+    "ultimo_consulta": "2022-23-12T15:30:00Z"
+  },
+  {
+    "id": "145236",
+    "paciente": "Juan Carlos Martínez Pérez",
+    "fecha_nacimiento": "1994-24-10",
+    "tipo_identificacion": "CC",
+    "no_identificacion": "589623014",
+    "celular": "3184762095",
+    "telefono": "(602) 145236",
+    "direccion": "calle 15 # 92-51",
+    "ocupacion": "Independiente",
+    "entidad": "Sura Capita",
+    "estado": "Estable",
+    "tipo_atencion": "Consulta de Psiquiatría",
+    "ultimo_consulta": "2024-18-02T15:30:00Z"
+  },
+  {
+    "id": "136524",
+    "paciente": "Luis Alejandro Hernández Grisales",
+    "fecha_nacimiento": "1994-24-10",
+    "tipo_identificacion": "CC",
+    "no_identificacion": "176594302",
+    "celular": "3219587430",
+    "telefono": "(602) 136524",
+    "direccion": "calle 15 # 92-51",
+    "ocupacion": "Independiente",
+    "entidad": "Particular",
+    "estado": "Critico",
+    "tipo_atencion": "Consulta de Psiquiatría",
+    "ultimo_consulta": "2024-10-04T15:30:00Z"
+  },
+  {
+    "id": "152463",
+    "paciente": "Ana Sofía Rodríguez García",
+    "fecha_nacimiento": "1994-24-10",
+    "tipo_identificacion": "CC",
+    "no_identificacion": "830165927",
+    "celular": "3219587430",
+    "telefono": "(602) 152463",
+    "direccion": "calle 15 # 92-51",
+    "ocupacion": "Independiente",
+    "entidad": "Eps Sanitas",
+    "estado": "Estable",
+    "tipo_atencion": "Consulta de Psiquiatría",
+    "ultimo_consulta": "2023-11-10T15:30:00Z"
+  }
+]
