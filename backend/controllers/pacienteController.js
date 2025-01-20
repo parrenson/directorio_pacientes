@@ -1,4 +1,6 @@
-import { getPacientesModel, getPacienteModel, getConsultasModel, updatePacienteModel } from '../models/pacienteModel.js';
+import { getPacientesModel, getPacienteModel, updatePacienteModel } from '../models/pacienteModel.js';
+import { getConsultasModel } from '../models/consultaModel.js';
+import { processCheckIn } from './consultaController.js';
 
 const getPacientes = (req, res) => {
     const pacientes = getPacientesModel();
@@ -49,7 +51,21 @@ const updatePaciente = (req, res) => {
     });
 };
 
-const checkIn = () => { };
+const checkIn = (req, res) => { 
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    const paciente = getPacienteModel(id);
+
+    if (!paciente) {
+        return res.status(404).json({ 
+            status: 'error',
+            message: 'Paciente no encontrado' 
+        });
+    }
+
+    processCheckIn(req, res, paciente);
+};
 
 
 
