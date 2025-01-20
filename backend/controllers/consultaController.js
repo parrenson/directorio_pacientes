@@ -1,13 +1,19 @@
-import { addConsultaModel } from '../models/consultaModel.js';
+import { addConsultaModel, getConsultasModel, deleteConsultaModel } from '../models/consultaModel.js';
 
-const processCheckIn = (req, res, paciente) => {
-    const { especialista, observacion, fecha_consulta } = req.body;
+const getConsultas = (id) => {
+    const consultas = getConsultasModel(id);
+    return consultas || [];
+
+};
+
+const consultaCheckIn = (req, res, paciente) => {
+    const { especialista, observacion } = req.body;
 
     const nuevaConsulta = {
-        id_paciente: paciente.id,
+        paciente_id: paciente,
         especialista,
         observacion,
-        fecha_consulta: fecha_consulta || new Date().toISOString()
+        fecha_consulta: new Date().toISOString()
     };
 
     addConsultaModel(nuevaConsulta);
@@ -18,4 +24,22 @@ const processCheckIn = (req, res, paciente) => {
     });
 };
 
-export { processCheckIn };
+const deleteConsultaById = (req, res, paciente) => {
+    const { consulta } = req.params; 
+
+    const isDeleted = deleteConsultaModel(consulta, paciente);
+
+    if (!isDeleted) {
+        return res.status(404).json({
+            status: 'error',
+            message: 'Consulta no encontrada'
+        });
+    }
+
+    res.status(200).json({
+        status: 'success',
+        message: 'Consulta eliminada'
+    });
+};
+
+export { getConsultas, consultaCheckIn, deleteConsultaById };

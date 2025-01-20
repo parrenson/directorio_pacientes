@@ -1,6 +1,5 @@
 import { getPacientesModel, getPacienteModel, updatePacienteModel } from '../models/pacienteModel.js';
-import { getConsultasModel } from '../models/consultaModel.js';
-import { processCheckIn } from './consultaController.js';
+import { consultaCheckIn, getConsultas, deleteConsultaById } from './consultaController.js';
 
 const getPacientes = (req, res) => {
     const pacientes = getPacientesModel();
@@ -21,7 +20,7 @@ const getPaciente = (req, res) => {
         });
     }
 
-    const consultas = getConsultasModel(id);
+    const consultas = getConsultas(id);
     paciente.consultas = consultas || [];
 
     res.status(200).json({
@@ -53,7 +52,6 @@ const updatePaciente = (req, res) => {
 
 const checkIn = (req, res) => { 
     const { id } = req.params;
-    const updatedData = req.body;
 
     const paciente = getPacienteModel(id);
 
@@ -63,10 +61,25 @@ const checkIn = (req, res) => {
             message: 'Paciente no encontrado' 
         });
     }
-
-    processCheckIn(req, res, paciente);
+     
+    return consultaCheckIn(req, res, paciente.id);
 };
 
+const deleteConsulta = (req, res) => {
+    const { id } = req.params; 
+
+    const paciente = getPacienteModel(id);
+
+    if (!paciente) {
+        return res.status(404).json({
+            status: 'error',
+            message: 'Paciente no encontrado'
+        });
+    }
+
+    return deleteConsultaById(req, res, id);
+}
 
 
-export { getPacientes, getPaciente, updatePaciente, checkIn };
+
+export { getPacientes, getPaciente, updatePaciente, checkIn, deleteConsulta };

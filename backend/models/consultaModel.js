@@ -28,11 +28,25 @@ const getConsultasModel = (paciente_id) => {
 const addConsultaModel = (consulta) => {
     const consultas = readConsultas();
 
-    const newId = consultas.length > 0 ? consultas[consultas.length - 1].id + 1 : 1;
-    const newConsulta = { ...consulta, id: newId };
+    const lastId = consultas.length > 0 ? parseInt(consultas[consultas.length - 1].id, 10) : 1;
+    const newId = (lastId + 1).toString();
+    const newConsulta = { id: newId, ...consulta };
 
     consultas.push(newConsulta);
     writeConsultas(consultas);
 };
 
-export { getConsultasModel, addConsultaModel };
+const deleteConsultaModel = (consultaId, pacienteId) => {
+    const consultas = readConsultas();
+
+    const updatedConsultas = consultas.filter(consulta => consulta.id !== consultaId || consulta.paciente_id !== pacienteId);
+
+    if (consultas.length === updatedConsultas.length) {
+        return false;
+    }
+
+    writeConsultas(updatedConsultas);
+    return true;
+};
+
+export { getConsultasModel, addConsultaModel, deleteConsultaModel };
