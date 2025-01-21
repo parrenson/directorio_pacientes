@@ -7,4 +7,24 @@ backend/yarn.lock
 backend/dist/
 frontend/dist/
 
-.DS_Store
+# dependencies
+frontend/.pnp
+frontend.pnp.js
+
+# testing
+frontend/coverage
+
+# production
+frontend/build
+
+# debug
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.pnpm-debug.log*
+
+# local env files
+frontend/.env*.local
+frontend/.env
+
+frontend/.DS_Store
