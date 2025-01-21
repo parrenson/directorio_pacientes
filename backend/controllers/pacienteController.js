@@ -3,6 +3,15 @@ import { consultaCheckIn, getConsultas, deleteConsultaById } from './consultaCon
 
 const getPacientes = (req, res) => {
     const pacientes = getPacientesModel();
+
+    pacientes.map((paciente) => {
+        const consultas = getConsultas(paciente.id);
+        if (consultas.length > 0) {
+            const ultimaConsulta = consultas[consultas.length - 1];
+            paciente.ultimo_consulta = ultimaConsulta.fecha_consulta;
+        } else paciente.ultimo_consulta = '';
+    });
+
     res.status(200).json({
         status: 'success',
         pacientes: pacientes
