@@ -8,7 +8,7 @@
 :root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem; 
   --primary-color: #0F4C81;
   --primary-bg-color: #0F4C81;
   --text-base-color: #707070;
@@ -19,6 +19,24 @@
   --bg-green-color: #DEEFC9;
   --bg-yellow-color: #FFF4DE;
   --bg-red-color: #FFCDD4;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hidden {
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
 }
 
 

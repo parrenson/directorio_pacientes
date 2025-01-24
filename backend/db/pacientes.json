@@ -16,7 +16,7 @@
   {
     "id": "165432",
     "paciente": "María Fernanda López García",
-    "fecha_nacimiento": "1996-15-05",
+    "fecha_nacimiento": "1996-05-15",
     "tipo_identificacion": "CC",
     "no_identificacion": "402384765",
     "celular": "3158206349",
@@ -30,7 +30,7 @@
   {
     "id": "145236",
     "paciente": "Juan Carlos Martínez Pérez",
-    "fecha_nacimiento": "1994-24-10",
+    "fecha_nacimiento": "1994-10-24",
     "tipo_identificacion": "CC",
     "no_identificacion": "589623014",
     "celular": "3184762095",
@@ -44,7 +44,7 @@
   {
     "id": "136524",
     "paciente": "Luis Alejandro Hernández Grisales",
-    "fecha_nacimiento": "1994-24-10",
+    "fecha_nacimiento": "1994-10-24",
     "tipo_identificacion": "CC",
     "no_identificacion": "176594302",
     "celular": "3219587430",
@@ -58,7 +58,7 @@
   {
     "id": "152463",
     "paciente": "Ana Sofía Rodríguez García",
-    "fecha_nacimiento": "1994-24-10",
+    "fecha_nacimiento": "1994-08-19",
     "tipo_identificacion": "CC",
     "no_identificacion": "830165927",
     "celular": "3219587430",

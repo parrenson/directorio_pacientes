@@ -1,74 +1,40 @@
-import { Table } from '@components';
+import { useState, useEffect } from "react";
+import { Table, Modal } from '@components';
+import { getPacientes, getPaciente, updatePaciente, createConsulta, deleteConsulta } from '@services';
+import { parseTypeID, getSClassByStatus, parseToString, randomDoctor } from '@utils';
+import moment from 'moment';
+import Swal from 'sweetalert2';
 
 export const Dashboard = () => {
-    const data = [
-        {
-            id: 123456,
-            paciente: "Javier Andrés Caicedo Rodríguez",
-            tipo_identificacion: "CC",
-            identificacion: "123456789",
-            celular: "3015896358",
-            entidad: "Eps Sanitas",
-            ultimaAtencion: "10/01/2024",
-            tipoAtencion: "Consulta de Psiquiatría",
-            estado: "Estable",
-        },
-        {
-            id: 165432,
-            paciente: "María Fernanda López García",
-            tipo_identificacion: "CC",
-            identificacion: "402384765",
-            celular: "3158206349",
-            entidad: "Sura Capita",
-            ultimaAtencion: "22/12/2023",
-            tipoAtencion: "Consulta de Psicología",
-            estado: "Moderado",
-        },
-        {
-            id: 145236,
-            paciente: "Juan Carlos Martínez Pérez",
-            tipo_identificacion: "CC",
-            identificacion: "589623014",
-            celular: "3184762095",
-            entidad: "Sura Capita",
-            ultimaAtencion: "18/02/2024",
-            tipoAtencion: "Consulta de Psiquiatría",
-            estado: "Estable",
-        },
-        {
-            id: 136524,
-            paciente: "Luis Alejandro Hernández Grisales",
-            tipo_identificacion: "CC",
-            identificacion: "176594302",
-            celular: "3219587430",
-            entidad: "Particular",
-            ultimaAtencion: "10/04/2024",
-            tipoAtencion: "Consulta de Psiquiatría",
-            estado: "Crítico",
-        },
-        {
-            id: 152463,
-            paciente: "Ana Sofía Rodríguez García",
-            tipo_identificacion: "CC",
-            identificacion: "830165927",
-            celular: "3166958420",
-            entidad: "Eps Sanidad",
-            ultimaAtencion: "11/10/2023",
-            tipoAtencion: "Consulta de Psicología",
-            estado: "Estable",
-        },
-    ];
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [pacientes, setPacientes] = useState([]);
+    const [selectedPatient, setSelectedPatient] = useState({
+        id: "",
+        paciente: "",
+        tipo_identificacion: "",
+        identificacion: "",
+        celular: "",
+        entidad: "",
+        ultimaAtencion: "",
+        tipoAtencion: "",
+        estado: "",
+        consultas: [],
+    });
 
-    const getStatusClass = (status) => {
-        switch (status) {
-            case "Estable":
-                return "bg-(--bg-green-color) text-(--text-green-color)";
-            case "Moderado":
-                return "bg-(--bg-yellow-color) text-(--text-yellow-color)";
-            case "Crítico":
-                return "bg-(--bg-red-color) text-(--text-red-color)";
-            default:
-                return "bg-gray-100 text-gray-600";
+    useEffect(() => {
+        fetchPacientes();
+    }, []);
+
+    const fetchPacientes = async () => {
+        try {
+            const pacientes = await getPacientes();
+            pacientes.map((paciente) => {
+                paciente.ultimo_consulta = moment(paciente.ultimo_consulta).format('DD/MM/YYYY');
+                return paciente;
+            });
+            setPacientes(pacientes);
+        } catch (error) {
+            console.error('Error al obtener pacientes:', error);
         }
     };
 
@@ -91,7 +57,13 @@ export const Dashboard = () => {
             className: "w-[300px] gap-2",
             cell: (row) => {
                 return (
-                    <a href="#">
+                    <a
+                        onClick={(e) => {
+                            e.preventDefault()
+                            handleModalOpen(row);
+                        }}
+                        className="cursor-pointer"
+                    >
                         <h6 className='underline decoration-solid decoration-skip-ink-none text-(--text-link-color)'>
                             {row.paciente}
                         </h6>
@@ -106,7 +78,7 @@ export const Dashboard = () => {
             cell: (row) => {
                 return (
                     <span className='text-(--text-base-color)'>
-                        {row.tipo_identificacion} - {row.identificacion}
+                        {row.tipo_identificacion} - {row.no_identificacion}
                     </span>
                 )
             }
@@ -142,7 +114,7 @@ export const Dashboard = () => {
             cell: (row) => {
                 return (
                     <span className='text-(--text-base-color)'>
-                        {row.ultimaAtencion}
+                        {row.ultimo_consulta}
                     </span>
                 )
             }
@@ -154,7 +126,7 @@ export const Dashboard = () => {
             cell: (row) => {
                 return (
                     <span className='text-(--text-base-color)'>
-                        {row.tipoAtencion}
+                        {row.tipo_atencion}
                     </span>
                 )
             }
@@ -166,13 +138,124 @@ export const Dashboard = () => {
             className: "w-[120px] gap-0",
             cell: (row) => {
                 return (
-                    <span className={`w-[120px] h-[31px] flex items-center justify-center rounded-[8px] gap-2.5 opacity-0" ${getStatusClass(row.estado)} text-base font-bold`}>
+                    <span className={`w-[120px] h-[31px] flex items-center justify-center rounded-[8px] gap-2.5 opacity-0" ${getSClassByStatus(row.estado)} text-base font-bold`}>
                         {row.estado}
                     </span>
                 )
             }
         },
     ];
+
+    const [modalFields, setModalFields] = useState([
+        { name: 'paciente', label: 'Paciente', type: 'span', colspan: 2 },
+        { name: 'fecha_nacimiento', label: 'Fecha de nacimiento', type: 'span', colspan: 1 },
+        { name: 'edad', label: 'Edad', type: 'span', colspan: 1 },
+        { name: 'tipo_identificacion', label: 'Tipo de Identificación', type: 'span', colspan: 1 },
+        { name: 'no_identificacion', label: 'N° de Identificación', type: 'span', colspan: 1 },
+        { name: 'celular', label: 'Celular', type: 'span', colspan: 1, icon: 'edit' },
+        { name: 'telefono', label: 'Teléfono', type: 'span', colspan: 1 },
+        { name: 'direccion', label: 'Dirección', type: 'span', colspan: 1 },
+        { name: 'ocupacion', label: 'Ocupación', type: 'span', colspan: 1 },
+        { name: 'observacion', label: 'Agregar Observación', type: 'textarea', colspan: 2, placeholder: 'Observación' }
+    ]);
+
+    const handleModalOpen = async (data) => {
+        const id = data.id;
+        try {
+            const paciente = await getPaciente(id);
+            const birthDate = moment(paciente.fecha_nacimiento, 'YYYY-MM-DD');
+            const age = moment().diff(birthDate, 'years');
+            paciente.edad = age;
+            paciente.tipo_identificacion = parseTypeID(paciente.tipo_identificacion);
+            paciente.consultas.map((consulta) => {  
+                consulta.profesion = 'Médico General';
+                return consulta;
+            });
+            setSelectedPatient(paciente);
+        } catch (error) {
+            console.error('Error al obtener paciente:', error);
+        }
+        setIsModalOpen(true);
+    };
+
+    const handleEdit = (fieldName) => {
+        setModalFields((prevFields) =>
+            prevFields.map((field) =>
+                field.name === fieldName ? { ...field, type: 'number' } : field
+            )
+        );
+    };
+    const errorAlert = (error) => {
+        Swal.fire({
+            title: 'Error',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'Cerrar',
+            confirmButtonColor: '#0F4C81'
+        });
+    };
+
+    const successAlert = (title) => {
+        Swal.fire({
+            title: title,
+            icon: 'success',
+            confirmButtonText: 'Cerrar',
+            confirmButtonColor: '#0F4C81'
+        });
+    };
+
+    const handleSubmit = async (values) => {
+        try {
+            const { id, paciente, direccion, ocupacion, celular, telefono, observacion } = parseToString(values);
+            await fetchUpdatePaciente(id, { paciente, direccion, ocupacion, celular, telefono });
+    
+            if(observacion) {
+                const especialista = randomDoctor();
+                await fetchCreateConsulta(id, { especialista, observacion });
+            }
+        } catch(error) {
+            if (error.response && error.response.status === 400) {
+                const errors = error.response.data.errors;
+
+                const errorMessages = errors.map((err) => err.message).join('\n');
+                errorAlert(errorMessages);
+            }
+        }
+        setIsModalOpen(false);
+    }
+
+    const handleDeleteConsulta = async (values) => {
+        try {
+            const { id, paciente_id } = values;
+            await fetchDeleteConsulta(id, paciente_id);
+        } catch (error) {
+            if (error.response && error.response.status === 404) {
+                const errors = error.response.data.errors;
+
+                const errorMessages = errors.map((err) => err.message).join('\n');
+                errorAlert(errorMessages);
+            }
+        }
+        setIsModalOpen(false);
+    };
+
+    const fetchUpdatePaciente = async (id, data) => {
+        await updatePaciente(id, data);
+        fetchPacientes();
+        successAlert('Paciente actualizado');
+    };
+
+    const fetchCreateConsulta = async (id, data) => {
+        await createConsulta(id, data);
+        fetchPacientes();
+        successAlert('Consulta creada');
+    };
+
+    const fetchDeleteConsulta = async (id, paciente_id) => {
+        await deleteConsulta(id, paciente_id);
+        successAlert('Consulta eliminada');
+    };
+
     return (
         <>
             <h1 className="text-2xl font-bold text-left text-(--primary-color) mb-10">
@@ -180,8 +263,19 @@ export const Dashboard = () => {
             </h1>
             <Table
                 headers={headers}
-                data={data}
+                data={pacientes}
             />
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onEdit={handleEdit}
+                onDelete={(values) => handleDeleteConsulta(values) }
+                title="Información Paciente"
+                fields={modalFields}
+                initialValues={selectedPatient}
+                onSubmit={(values) => handleSubmit(values) }
+            />
+
         </>
     );
 };

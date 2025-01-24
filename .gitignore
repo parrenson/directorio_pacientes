@@ -23,8 +23,4 @@ frontend/yarn-debug.log*
 frontend/yarn-error.log*
 frontend/.pnpm-debug.log*
 
-# local env files
-frontend/.env*.local
-frontend/.env
-
 frontend/.DS_Store
